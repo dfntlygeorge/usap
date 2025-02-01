@@ -11,6 +11,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        upMaroon: "#7B1113",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
