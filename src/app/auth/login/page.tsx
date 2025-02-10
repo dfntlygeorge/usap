@@ -14,8 +14,8 @@ export default async function Page() {
 
   return (
     <div className="flex min-h-screen md:flex-row">
-      {/* Left Section (Larger) */}
-      <div className="bg-upMaroon hidden flex-1 flex-col items-start justify-center gap-20 px-4 text-background dark:text-foreground sm:px-12 md:flex">
+      {/* larger: this is just the overview of the app */}
+      <div className="hidden flex-1 flex-col items-start justify-center gap-20 bg-upMaroon px-4 text-background dark:text-foreground sm:px-12 md:flex">
         <div className="flex items-center justify-between">
           <Image
             src={"/usap-logo.png"}
@@ -38,7 +38,7 @@ export default async function Page() {
         </div>
       </div>
 
-      {/* Right Section (Smaller) */}
+      {/* smaller section: this is for the login*/}
       <div className="flex flex-1 items-center justify-center md:flex-[0.85]">
         <div className="flex flex-col items-center gap-6">
           <Image
