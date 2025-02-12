@@ -12,6 +12,9 @@ export default {
     extend: {
       colors: {
         upMaroon: "#7B1113",
+        upGreen: "#006747",
+        charcoal: "#2C2C2C",
+        lightGray: "#F9F9F9",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

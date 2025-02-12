@@ -10,7 +10,7 @@ export async function middleware(req: NextRequest) {
   });
 
   // list of protected routes
-  const protectedRoutes = ["/profile", "/", "/book"];
+  const protectedRoutes = ["/profile", "/dashboard", "/book", "/"];
 
   // we check if the request is for a protected route.
   if (protectedRoutes.includes(req.nextUrl.pathname)) {
@@ -23,5 +23,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/profile", "/book"],
+  matcher: ["/dashboard", "/profile", "/book", "/"],
 };
