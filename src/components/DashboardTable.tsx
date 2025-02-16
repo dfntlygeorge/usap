@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Table,
   TableBody,
@@ -13,9 +12,9 @@ import { Consultation } from "@/types";
 import Link from "next/link";
 import { formatDateAndTime } from "@/lib/utils";
 
-type Prop = {
-  consultations: Consultation[];
-};
+// type Prop = {
+//   consultations: Consultation[];
+// };
 
 const statusStyles: Record<string, string> = {
   Approved: "bg-[#EBF9F1] text-[#1F9254]",
@@ -23,7 +22,11 @@ const statusStyles: Record<string, string> = {
   Cancelled: "bg-[#FBE7E8] text-[#A30D11]",
 };
 
-const DashboardTable = ({ consultations }: Prop) => {
+const DashboardTable = ({
+  consultations,
+}: {
+  consultations: Consultation[];
+}) => {
   return (
     <Table>
       <TableCaption>A list of your consultations.</TableCaption>

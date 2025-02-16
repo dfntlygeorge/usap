@@ -8,3 +8,7 @@ export type Consultation = {
   status: "Approved" | "Cancelled" | "Pending";
   locationOrLink?: string;
 };
+
+export interface SearchProfProps {
+  setSelectedProfessor: (professorName: string | null) => void;
+}

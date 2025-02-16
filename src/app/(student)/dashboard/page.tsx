@@ -1,9 +1,8 @@
 import DashboardTable from "@/components/DashboardTable";
-import React from "react";
 import { consultations } from "@/data";
 import { auth } from "@/app/auth";
 
-const page = async () => {
+const Page = async () => {
   const session = await auth();
   const user = session?.user;
   const firstName = user?.name?.split(" ")[0] || "Guest";
@@ -21,4 +20,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default Page;

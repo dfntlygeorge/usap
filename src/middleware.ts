@@ -3,22 +3,35 @@ import { NextRequest, NextResponse } from "next/server"; // this is to handle th
 
 export async function middleware(req: NextRequest) {
   console.log("Middleware is running");
-  // we get the toker from the cookies using getToken from next
+
+  // Get the token from the cookies using getToken from next-auth
   const token = await getToken({
     req,
     secret: process.env.AUTH_SECRET,
   });
 
-  // list of protected routes
+  // List of protected routes
   const protectedRoutes = ["/profile", "/dashboard", "/book", "/"];
 
-  // we check if the request is for a protected route.
+  // Check if the request is for a protected route
   if (protectedRoutes.includes(req.nextUrl.pathname)) {
     if (!token) {
-      const loginUrl = new URL("auth/login", req.url);
+      const loginUrl = new URL("/auth/login", req.url);
       return NextResponse.redirect(loginUrl);
     }
+
+    // const email = token.email;
+    // console.log(email);
+
+    // // // Check if the email is valid and ends with '@up.edu.ph'
+    // if (!email || !email.endsWith("@up.edu.ph")) {
+    //   const loginUrl = new URL("/auth/login", req.url);
+    //   if (req.nextUrl.pathname !== "/auth/login") {
+    //     return NextResponse.redirect(loginUrl);
+    //   }
+    // }
   }
+
   return NextResponse.next();
 }
 

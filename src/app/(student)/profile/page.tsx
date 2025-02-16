@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { auth } from "@/app/auth";
 
-const page = async () => {
+const Page = async () => {
   const session = await auth();
   const user = session?.user;
   const studentMockData = {
@@ -65,4 +65,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default Page;
