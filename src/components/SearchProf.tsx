@@ -16,7 +16,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { professors } from "@/data";
-import { SearchProfProps } from "@/types";
+import { SearchProfProps } from "@/types/types";
 
 export default function SearchProf({ setSelectedProfessor }: SearchProfProps) {
   const [open, setOpen] = React.useState(false);

@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Image from "next/image";
-import { Consultation } from "@/types";
+import { Consultation } from "@/types/types";
 import Link from "next/link";
 import { formatDateAndTime } from "@/lib/utils";
 

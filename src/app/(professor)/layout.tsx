@@ -17,6 +17,7 @@ export default function RootLayout({
     <html lang="en" className="">
       <body className={`bg-background text-foreground antialiased`}>
         <NavBar />
+        <p>Professor</p>
         {children}
         <Toaster />
       </body>

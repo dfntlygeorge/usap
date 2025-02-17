@@ -1,4 +1,4 @@
-import { Consultation } from "./types";
+import { Consultation } from "./types/types";
 
 export const consultations: Consultation[] = [
   {

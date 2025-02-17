@@ -1,35 +1,24 @@
-import { getToken } from "next-auth/jwt"; // this function is for getting the token (cookie)
-import { NextRequest, NextResponse } from "next/server"; // this is to handle the response
+import { getToken } from "next-auth/jwt";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(req: NextRequest) {
-  console.log("Middleware is running");
+  console.log("Middleware is running...");
 
-  // Get the token from the cookies using getToken from next-auth
+  // ✅ Get the token (JWT) from the request cookies
   const token = await getToken({
     req,
-    secret: process.env.AUTH_SECRET,
+    secret: process.env.AUTH_SECRET, // 🔥 Ensure this matches NextAuth config
   });
 
-  // List of protected routes
+  console.log("Token in middleware:", token);
+
+  // ✅ Define protected routes
   const protectedRoutes = ["/profile", "/dashboard", "/book", "/"];
 
-  // Check if the request is for a protected route
-  if (protectedRoutes.includes(req.nextUrl.pathname)) {
-    if (!token) {
-      const loginUrl = new URL("/auth/login", req.url);
-      return NextResponse.redirect(loginUrl);
-    }
-
-    // const email = token.email;
-    // console.log(email);
-
-    // // // Check if the email is valid and ends with '@up.edu.ph'
-    // if (!email || !email.endsWith("@up.edu.ph")) {
-    //   const loginUrl = new URL("/auth/login", req.url);
-    //   if (req.nextUrl.pathname !== "/auth/login") {
-    //     return NextResponse.redirect(loginUrl);
-    //   }
-    // }
+  // ✅ Redirect if no token is found
+  if (protectedRoutes.includes(req.nextUrl.pathname) && !token) {
+    console.log("No token found, redirecting to login...");
+    return NextResponse.redirect(new URL("/auth/login", req.url));
   }
 
   return NextResponse.next();
