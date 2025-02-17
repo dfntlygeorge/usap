@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const NavBar = () => {
+const StudentNavBar = () => {
   return (
     <header className="mb-10 bg-upMaroon px-6 py-2 text-2xl font-bold text-background dark:text-foreground md:px-12 md:py-3">
       <nav className="flex justify-between">
@@ -72,4 +72,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default StudentNavBar;
