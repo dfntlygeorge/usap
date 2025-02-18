@@ -11,10 +11,7 @@ import Image from "next/image";
 import { Consultation } from "@/types/types";
 import Link from "next/link";
 import { formatDateAndTime } from "@/lib/utils";
-
-// type Prop = {
-//   consultations: Consultation[];
-// };
+import { getUserRole } from "@/lib/getUserRole";
 
 const statusStyles: Record<string, string> = {
   Approved: "bg-[#EBF9F1] text-[#1F9254]",
@@ -22,11 +19,13 @@ const statusStyles: Record<string, string> = {
   Cancelled: "bg-[#FBE7E8] text-[#A30D11]",
 };
 
-const DashboardTable = ({
+const DashboardTable = async ({
   consultations,
 }: {
   consultations: Consultation[];
 }) => {
+  const userRole = await getUserRole();
+
   return (
     <Table>
       <TableCaption>A list of your consultations.</TableCaption>
@@ -79,6 +78,16 @@ const DashboardTable = ({
             <TableCell>
               <div className="flex gap-2">
                 {/* TODO: DELETE request for deleting a row in consultation table. */}
+                {userRole === "PROFESSOR" ? (
+                  <Link href={`/manage/${consultation.id}`}>
+                    <Image
+                      src={"/edit.svg"}
+                      alt="edit button"
+                      width={24}
+                      height={24}
+                    />
+                  </Link>
+                ) : null}
                 <button>
                   <Image
                     src={"/trash.svg"}

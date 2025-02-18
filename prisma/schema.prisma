@@ -103,7 +103,7 @@ model Consultation{
 model Professor {
   id           String          @id @default(cuid())
   name         String?
-  schedule     Json?
+  schedule     Json @default("{}")
   userId      String    @unique   // Ensure unique userId here
 
   consultations Consultation[]

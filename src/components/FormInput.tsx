@@ -16,6 +16,7 @@ interface FormInputProps {
   as?: React.ElementType;
   readOnly?: boolean;
   value?: string;
+  type?: string;
 }
 
 const FormInput = ({
@@ -26,6 +27,7 @@ const FormInput = ({
   as: Component = Input,
   readOnly = false,
   value,
+  type,
 }: FormInputProps) => {
   return (
     <FormField
@@ -41,6 +43,7 @@ const FormInput = ({
               readOnly={readOnly}
               value={value}
               disabled={readOnly}
+              type={type}
             />
           </FormControl>
           <FormMessage />

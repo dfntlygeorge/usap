@@ -1,6 +1,8 @@
 import Image from "next/image";
 import React from "react";
 import { auth } from "@/app/auth";
+import ScheduleTable from "@/components/ScheduleTable";
+import { getUserRole } from "@/lib/getUserRole";
 
 const Page = async () => {
   const session = await auth();
@@ -11,6 +13,7 @@ const Page = async () => {
     zodiacSign: "Pisces",
     saisId: "12345678",
   };
+  const userRole = await getUserRole();
   return (
     <section className="px-6 py-1 uppercase md:px-24 md:py-2">
       <div className="mb-6 flex items-center gap-4">
@@ -61,6 +64,7 @@ const Page = async () => {
           </div>
         </div>
       </div>
+      {userRole === "PROFESSOR" ? <ScheduleTable /> : null}
     </section>
   );
 };
