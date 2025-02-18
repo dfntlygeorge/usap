@@ -18,6 +18,10 @@ model User {
   role String @default("STUDENT")
   // Optional for WebAuthn support
   Authenticator Authenticator[]
+  consultations Consultation[]
+
+  professor     Professor?      @relation
+
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -76,4 +80,36 @@ model Authenticator {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
  
   @@id([userId, credentialID])
+}
+
+model Consultation{
+  id String @id @default(cuid())
+  userId String
+  professorId String
+  date DateTime
+  time String
+  consultationType String
+  subjectAndSection String
+  status String @default("Pending") // Approved, Pending, Cancelled
+  locationOrLink String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  professor Professor @relation(fields: [professorId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Professor {
+  id           String          @id @default(cuid())
+  name         String?
+  schedule     Json?
+  userId      String    @unique   // Ensure unique userId here
+
+  consultations Consultation[]
+
+  user         User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
 }
