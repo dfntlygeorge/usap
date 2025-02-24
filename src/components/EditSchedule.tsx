@@ -13,7 +13,7 @@ export function EditSchedule() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Edit Schedule</Button>
+        <Button>Add block</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

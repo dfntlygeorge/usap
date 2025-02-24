@@ -3,6 +3,7 @@ import React from "react";
 import { auth } from "@/app/auth";
 import ScheduleTable from "@/components/ScheduleTable";
 import { getUserRole } from "@/lib/getUserRole";
+import { EditSchedule } from "@/components/EditSchedule";
 
 const Page = async () => {
   const session = await auth();
@@ -65,6 +66,9 @@ const Page = async () => {
         </div>
       </div>
       {userRole === "PROFESSOR" ? <ScheduleTable /> : null}
+      <div className="flex max-w-4xl justify-end">
+        <EditSchedule />
+      </div>
     </section>
   );
 };

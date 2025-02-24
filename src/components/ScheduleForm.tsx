@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import FormSelect from "./FormSelect";
 import FormInput from "./FormInput";
-import { auth } from "@/app/auth";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
   day: z.string().min(1, {
@@ -32,6 +33,8 @@ const formSchema = z.object({
 export type FormInput = z.infer<typeof formSchema>;
 
 export function ScheduleForm() {
+  const router = useRouter();
+  const { toast } = useToast();
   // Initialize the form
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -46,27 +49,30 @@ export function ScheduleForm() {
   // Handle form submission
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      // const session = await auth();
-      // const userId = session?.user.id;
-      // console.log(`Hello this is the user id ${userId}`);
-      const res: Response = await fetch("/api/professor/schedule", {
+      const res = await fetch("/api/professor/schedule", {
         method: "POST",
         body: JSON.stringify(values),
-        headers: {
-          "content-type": "application/json",
-        },
+        headers: { "content-type": "application/json" },
       });
 
       if (!res.ok) {
         throw new Error("Failed to update schedule");
       }
 
-      const data = await res.json();
-      console.log("Schedule updated:", data);
+      toast({
+        title: "Success",
+        description: "Schedule updated successfully!",
+        variant: "default",
+      }); // ✅ Success Toast
+      router.refresh(); // ✅ Revalidate the /profile page
     } catch (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: "Failed to update schedule.",
+        variant: "destructive",
+      }); // ✅ Error Toast
+      console.error(error);
     }
-    console.log(values);
   };
 
   return (
